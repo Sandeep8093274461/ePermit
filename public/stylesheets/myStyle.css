@@ -1,0 +1,39 @@
+.panel-primary {
+    border-color: #ed5707 !important;
+    font-size: 16px  !important;
+}
+
+.panel-primary>.panel-heading {
+    color: #fff !important;
+    background-color: #ed5707!important;
+    border-color:#ed5707 !important;
+}
+
+
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    color: #fff;
+    background: #010135 !important;
+}
+
+button, .btn {
+    background-color: #22225a !important;;
+    border-color: #292958 !important;
+    color: white;
+}
+.btn:hover
+{
+    background-color: #4d5736;
+    border-color: #4d5736;
+}
+
+.modal-header {
+    color: white;
+    padding: 10px;
+    height: 45px !important;
+    text-transform: uppercase !important;
+    background: #ea6608 !important;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    text-align: center;
+}

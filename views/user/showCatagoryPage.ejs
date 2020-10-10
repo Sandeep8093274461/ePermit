@@ -1,0 +1,67 @@
+
+<%- include('common/header.ejs') -%>
+
+<div class="content-wrapper">
+    <div class="container"><br>
+
+        <div class="tab-content" style=" width: 1100px; height: 850px;"><br>
+            <div class="tab-pane fade in active">
+
+              <div class="panel panel-primary" id="allShow" class="tab-pane fade in active" style="height: 900px;">
+                <div class="panel-heading">
+                    <span><strong>
+                            <center>Applicant details</center>
+                        </strong>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="row" >
+                                   
+                        <table class="table table-hover">
+                          <thead >
+                            <tr style="text-align: center;">
+                              <th>Sl </th>
+                              <th>Category </th>
+                              <th>Sub Category</th>
+                              <th>URL </th>
+                              <th>Is Accesable ? </th>
+                              <th>Host At</th>
+                              <th>Maintaince By Nic</th>
+                              <th>Remark</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr style="text-align:left;">
+                              <td>{{$index+1}}</td>
+                              <td>{{allData.category.catagory}}</td>
+                              <td>{{allData.Subcategory.name}}</td>
+                              <td>{{allData.url.url}}</td>
+                              <td>{{allData.accesable}}</td>
+                              <td>{{allData.host}}</td>
+                              <td>{{allData.maintainace}}</td>
+                              <td>{{allData.remark}}</td>
+                            </tr>
+                          
+                          </tbody>
+                        </table>
+                      </div>
+                 
+            </div>
+               
+                </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-md-6" style="text-align: left;">
+                    <button class="btn btn-info " ng-click="back(alldata.register);" style="text-align: right;">Back</button>
+                  </div>
+            
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+  <script src="../controller/user/showCatagoryPage.js"></script>
+  <%- include('common/footer.ejs') -%>

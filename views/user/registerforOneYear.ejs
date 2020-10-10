@@ -1,0 +1,1463 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+  <section class="content">
+    <script type="text/javascript" src="../../javascripts/jquery.min.js"></script>
+
+    <div class="mybox">
+
+      <form name="myForm" novalidate ng-show="showAppForm">
+        <div class="panel panel-primary" id="allShow" class="tab-pane fade in active"
+          style="color: blue;border-radius: 30px;">
+          <div class="panel-heading" style="border-radius: 30px;">
+            <span><strong>
+                <center>APPLICATION FORM FOR INNER LINE PERMIT (ILP) FOR 1(ONE) YEAR<br>
+                </center>
+              </strong>
+              <center>Home Department, Notification NO.CON-3/PAP/65/10, Dated Kohima, the 9th December,
+                2019,<br>
+                extending Inner Line to cover the entire District of Dimapur.
+              </center>
+            </span>
+          </div><br>
+          <div class="panel panel-primary" id="allShow" style="border-radius: 30px;">
+            <div class="panel-heading" style="border-radius: 30px;">
+              <span><strong>
+                  <center>User Details</center>
+                </strong>
+              </span>
+            </div>
+            <div class="panel-body">
+              <style>
+                input {
+                  text-transform: uppercase
+                }
+              </style>
+              <div class="row">
+                <div class="table col-lg-12 col-xs-12 ">
+                  <div class="row">
+                    <div class="col-md-3"><label for="name"><b>Enter Token Number<span
+                            style="color: red">*</span>:</b></label></div>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" name="tokenNo" ng-model="tokenNo"
+                        placeholder="Enter Token Number" maxlength="6" minlength="6" required
+                        ng-change="validateToken()">
+                      <span ng-show="tokenno" style="color:red">Token Number already used by {{userId}} .</span>
+                      <span style="color:red" ng-show="myForm.tokenNo.$dirty && myForm.tokenNo.$invalid">
+                        <span ng-show="myForm.tokenNo.$error.required">Token Number is Required
+                          .</span>
+                      </span>
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name"><b>Name<span style="color: red">*</span>:</b></label><br>
+
+                      <div class="col-md-3" style="padding: 0%;">
+                        <select class="form-control" name="ntitle" ng-model="ntitle" ng-disabled="tokenno" required>
+                          <option value="Shri."> SHRI</option>
+                          <option value="Smti."> SMTI</option>
+                          <option value="Miss."> MISS</option>
+                          <option value="Kumari."> KUMARI</option>
+                          <option value="Master."> MASTER</option>
+                        </select>
+
+                        </span>
+                      </div>
+                      <div class="col-md-9" style="padding: 0%;">
+                        <input type="text" class="form-control" name="name" ng-model="name"
+                          placeholder="Enter your name" onkeypress='nameFilter(event)' ng-disabled="tokenno" required>
+                        <span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+                          <span ng-show="myForm.name.$error.required">Name is Required
+                            .</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Father Name<span style="color: red">*</span>:</b></label><br>
+                      <div class="col-md-3" style="padding: 0%;">
+                        <select class="form-control" name="fatherTitle" ng-model="fatherTitle" required>
+                          <option value="Shri."> SHRI</option>
+                          <option value="Late."> LATE</option>
+                        </select>
+
+                        </span>
+                      </div>
+                      <div class="col-md-9" style="padding: 0%;">
+                        <input type="text" class="form-control" name="fathername" ng-model="fathername"
+                          placeholder="Enter your Father name" required>
+                        <span style="color:red" ng-show="myForm.fathername.$dirty && myForm.fathername.$invalid">
+                          <span ng-show="myForm.fathername.$error.required">Fathers Name is
+                            required.</span>
+                        </span>
+                      </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="Phone"><b>Date Of Birth<span style="color: red">*</span>:</b></label>
+                      <input type="date" class="form-control" name="dob" ng-model="dob" required>
+                      <span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
+                        <span ng-show="myForm.dob.$error.required">Date Of Birth is
+                          required.</span>
+                      </span>
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="gender"><b>Gender<span style="color: red">*</span>:</b></label>
+                      <select class="form-control" name="gender" ng-model="gender" required>
+                        <option value="" disabled selected>--select--</option>
+                        <option value="Male"> MALE</option>
+                        <option value="Female"> FEMALE</option>
+                        <option value="Transgender"> TRANSGENDER</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="name"><b>Identification Mark<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" name="mark" ng-model="mark"
+                        placeholder="Enter Identification Mark" onkeypress='nameFilter(event)' required>
+                      <span style="color:red" ng-show="myForm.mark.$dirty && myForm.mark.$invalid">
+                        <span ng-show="myForm.mark.$error.required">Enter Your Identification
+                          Mark.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Contact Number:</b></label>
+                      <input type="text" class="form-control" name="contactno" ng-model="contactno"
+                        placeholder="Enter Contact numer" maxlength="10" minlength="10" ng-pattern="/^[1-9][0-9]{9}$/"
+                        allow-numbers-only onkeypress='validate(event)'>
+                      <span ng-show="myForm.contactno.$error.pattern" style="color:red">Invalid Contact Number.</span>
+                      <span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
+                        <span ng-show="myForm.contactno.$error.required">Enter Your Valid Phone
+                          Number.</span>
+                      </span>
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Aadhaar Number:</b></label>
+                      <input type="text" class="form-control" name="addahar" ng-model="addahar"
+                        placeholder="Enter Aadhaar numer" maxlength="12" minlength="12" onkeypress='validate(event)'
+                        ng-pattern="/^[1-9][0-9]{11}$/" allow-numbers-only>
+                      <span ng-show="myForm.addahar.$error.pattern" style="color:red">Invalid Aadhar.</span>
+                      <span style="color:red" ng-show="myForm.addahar.$dirty && myForm.addahar.$invalid">
+                        <span ng-show="myForm.addahar.$error.required">Enter Your Aadhaar
+                          Number</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Photo Upload:</b></label>
+                      <input type="file" class="form-control custom-file-input" accept="image/*"
+                        style="margin-left: 0px;" ng-model="photo" id="userPhoto" name="userPhoto" onchange="angular.element(this).scope().userPhotoCheck()">
+                      <div ng-show="showUserPhotoError" >
+                        <span style="color: red;">{{userPhotoFileGood}}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Phone"><b>Marital Status:</b></label>
+                      <select class="form-control" ng-model="material" name="material">
+                        <option value="Married"> MARRIED</option>
+                        <option value="Unmarried"> UNMARRIED</option>
+                      </select>
+                    </div>
+                  </div><br />
+                  <div class="row" ng-if="material == 'Married'">
+                    <div class="col-md-4">
+                      <label for=""><b>Husband/Spouse Name<span style="color: red">*</span>:</b></label><br>
+                      <div class="col-md-3" style="padding: 0%;">
+                        <select class="form-control" name="husband_spousetitle" ng-model="$parent.husband_spousetitle"
+                          required>
+                          <option value="" disabled selected>Select</option>
+                          <option value="Shri."> SHRI</option>
+                          <option value="Smti."> SMTI</option>
+                          <option value="Late."> LATE</option>
+                        </select>
+                      </div>
+                      <div class="col-md-9" style="padding: 0%;">
+                        <input type="text" class="form-control" name="husband_spouse" ng-model="$parent.husband_spouse"
+                          placeholder="Enter Husband Or Spouse name" onkeypress='nameFilter(event)'>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Father Name <span style="color: red">*</span>:</b></label><br>
+                      <div class="col-md-3" style="padding: 0%;">
+                        <select class="form-control" ng-model="$parent.husband_spousefathertitle"
+                          name="husband_spousefathertitle" required>
+                          <option value="" disabled selected>select</option>
+                          <option value="Shri."> SHRI</option>
+                          <option value="Late."> LATE</option>
+                        </select>
+                      </div>
+                      <div class="col-md-9" style="padding: 0%;">
+                        <input type="text" class="form-control" name="husband_spousename"
+                          ng-model="$parent.husband_spousename" placeholder="Enter husband/spouse Fathers name"
+                          onkeypress='nameFilter(event)'>
+                      </div>
+                    </div>
+                  </div><br />
+                </div><br />
+              </div>
+              </table>
+            </div>
+          </div>
+          <div class="panel panel-primary" id="allShow" class="tab-pane fade in active" style="border-radius: 30px;">
+            <div class="panel-heading" style="border-radius: 30px;">
+              <span><strong>
+                  <center>Present Address</center>
+                </strong>
+              </span>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="table col-lg-12 col-xs-12 ">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name"><b>State<span style="color: red">*</span>:</b></label>
+                      <input type="text" ng-disabled="!psstate" name="psstate" id="psstate" class="form-control"
+                        value="Nagaland">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="name"><b>District<span style="color: red">*</span>:</b></label>
+                      <select class="form-control" ng-options="x.districtName for x in psdistricts"
+                        ng-model="psdistrict" name="psdistrict" ng-change="loadPsSubdivisions()" required>
+                        <option value="" disabled>--District--</option>
+                      </select>
+                      <span style="color:red" ng-show="myForm.psdistrict.$dirty && myForm.psdistrict.$invalid">
+                        <span ng-show="myForm.psdistrict.$error.required">Choose Your
+                          District.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Pin Code"><b>Sub Division<span style="color: red">*</span>:</b></label>
+
+                      <select class="form-control" ng-options="x.subdivName for x in psSubdivList"
+                        ng-model="pssubdivision" name="pssubdivision" required>
+                        <option value="" disabled>--Sub-Division--</option>
+                      </select>
+                    </div>
+
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="gender"><b>Police Station<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="pspolicestation"
+                        placeholder="Enter Police station name" name="pspolicestation" onkeypress='nameNumber(event)'
+                        required>
+                      <span style="color:red"
+                        ng-show="myForm.pspolicestation.$dirty && myForm.pspolicestation.$invalid">
+                        <span ng-show="myForm.pspolicestation.$error.required">Police Station is
+                          required.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Post Office<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="pspostoffice"
+                        placeholder="Enter Post Office name" name="pspostoffice" onkeypress='nameNumber(event)'
+                        required>
+                      <span style="color:red" ng-show="myForm.pspostoffice.$dirty && myForm.pspostoffice.$invalid">
+                        <span ng-show="myForm.pspostoffice.$error.required">Post Office Name is
+                          required.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for=""><b>Village/Town<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="psvillege"
+                        placeholder="Enter Police station name" name="psvillege" onkeypress='nameNumber(event)'
+                        required>
+                      <span style="color:red" ng-show="myForm.psvillege.$dirty && myForm.psvillege.$invalid">
+                        <span ng-show="myForm.psvillege.$error.required">Village is
+                          required.</span>
+                      </span>
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Land Mark:</b></label>
+                      <input type="text" class="form-control" ng-model="pslandmark" placeholder="Enter Near Place"
+                        name="pslandmark" onkeypress='nameNumber(event)'>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Colony<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="pscolony" placeholder="Enter Colony"
+                        name="pscolony" required>
+                      <span style="color:red" ng-show="myForm.pscolony.$dirty && myForm.pscolony.$invalid">
+                        <span ng-show="myForm.pscolony.$error.required">Enter your colony</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Block/Lane:</b></label>
+                      <input type="text" class="form-control" ng-model="psblock_lane" placeholder="Enter Lane Number"
+                        name="psblock_lane">
+
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="fathername"><b>House/Plot No:</b></label>
+                      <input type="text" class="form-control" ng-model="psplotno" placeholder="Enter plot Number"
+                        name="psplotno">
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Phone"><b>Pincode<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="pspincode" placeholder="Enter Pincode"
+                        name="pspincode" maxlength="6" ng-pattern="/^[1-9][0-9]{5}$/" allow-numbers-only
+                        onkeypress='pincode(event)' required>
+                      <span ng-show="myForm.pspincode.$error.pattern" style="color:red">Invalid Pin Code.</span>
+                      <span style="color:red" ng-show="myForm.pspincode.$dirty && myForm.pspincode.$invalid">
+                        <span ng-show="myForm.pspincode.$error.required">Pincode is required.</span>
+                      </span>
+                    </div>
+                  </div><br />
+                </div><br />
+              </div>
+              </table>
+            </div>
+          </div>
+          <div class="panel panel-primary" id="allShow" class="tab-pane fade in active" style="border-radius: 30px;">   
+            <div class="panel-heading" style="border-radius: 30px;">
+              <span><strong>
+                  <center>Native Address</center>
+                </strong>
+              </span>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="table col-lg-12 col-xs-12 ">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name"><b>State<span style="color: red">*</span>:</b></label>
+
+                      <select class="form-control" ng-options="x.stateName for x in states" name="prstate"
+                        ng-model="prstate" ng-change="loadPrDistricts()" required>
+                        <option value="" disabled>--State--</option>
+                      </select>
+                      <span style="color:red" ng-show="myForm.prstate.$dirty && myForm.prstate.$invalid">
+                        <span ng-show="myForm.prstate.$error.required">Choose Your State.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="name"><b>District<span style="color: red">*</span>:</b></label>
+                      <select class="form-control" ng-options="x.districtName for x in prdistricts"
+                        ng-model="prdistrict" name="prdistrict" ng-change="loadPrBlocks()" required>
+                        <option value="" disabled>--District--</option>
+                      </select>
+                      <span style="color:red" ng-show="myForm.prdistrict.$dirty && myForm.prdistrict.$invalid">
+                        <span ng-show="myForm.prdistrict.$error.required">Choose Your
+                          District.</span>
+                      </span>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label><b>Sub-Division<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="prsubdivision"
+                        placeholder="Enter Your Sub-Division" name="prsubdivision" required>
+
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="gender"><b>Police Station<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="prpolicestation"
+                        placeholder="Enter Police station name" name="prpolicestation" onkeypress='nameNumber(event)'
+                        required>
+                      <span style="color:red"
+                        ng-show="myForm.prpolicestation.$dirty && myForm.prpolicestation.$invalid">
+                        <span ng-show="myForm.prpolicestation.$error.required">Police Station is
+                          required.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Post Office<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="prpostoffice"
+                        placeholder="Enter Post Office name" name="prpostoffice" onkeypress='nameNumber(event)'
+                        required>
+                      <span style="color:red" ng-show="myForm.prpostoffice.$dirty && myForm.prpostoffice.$invalid">
+                        <span ng-show="myForm.prpostoffice.$error.required">Post Office Name is
+                          required.</span>
+                      </span>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for=""><b>Village<span style="color: red">*</span>:</b></label>
+
+                      <input type="text" class="form-control" ng-model="prvillege" placeholder="Enter Villege Name"
+                        name="prvillege" onkeypress='nameNumber(event)' required>
+                      <span style="color:red" ng-show="myForm.prvillege.$dirty && myForm.prvillege.$invalid">
+                        <span ng-show="myForm.prvillege.$error.required">Village is
+                          required.</span>
+                      </span>
+                    </div>
+
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Land Mark:</b></label>
+                      <input type="text" class="form-control" ng-model="prlandmark" placeholder="Enter Landmark"
+                        name="prlandmark" onkeypress='nameNumber(event)'>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Colony<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="prcolony" placeholder="Enter Near Place"
+                        name="prcolony" required>
+                      <span style="color:red" ng-show="myForm.prcolony.$dirty && myForm.prcolony.$invalid">
+                        <span ng-show="myForm.prcolony.$error.required">Enter your Colony
+                          Name.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="fathername"><b>Block/Lane:</b></label>
+                      <input type="text" class="form-control" ng-model="prblock_lane" placeholder="Enter Lane Number"
+                        name="prblock_lane">
+                    </div>
+                  </div><br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="fathername"><b>House/Plot No:</b></label>
+                      <input type="text" class="form-control" ng-model="prplotno" placeholder="Enter plot Number"
+                        name="prplotno">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Phone"><b>Pincode<span style="color: red">*</span>:</b></label>
+                      <input type="text" class="form-control" ng-model="prpincode" placeholder="Enter Pincode"
+                        name="prpincode" maxlength="6" onkeypress='pincode(event)' required
+                        ng-pattern="/^[1-9][0-9]{5}$/" allow-numbers-only>
+                      <span ng-show="myForm.prpincode.$error.pattern" style="color:red">Invalid Pin Code.</span>
+                      <span style="color:red" ng-show="myForm.prpincode.$dirty && myForm.prpincode.$invalid">
+                        <span ng-show="myForm.prpincode.$error.required">Pincode is required.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Phone"><b>Upload Address Proof:<span style="color: red">*</span>:</b></label>
+                      <input type="file" accept=" image/jpg, image/jpeg,application/pdf" name="nativeAddressProof"
+                        id="nativeAddressProof" class="form-control" onchange="angular.element(this).scope().nativeAddressProof()">
+                      <div ng-show="showNativeAddressProofError">
+                        <span style="color: red;">{{nativeAddressProofFileGood}}</span>
+                      </div>
+                    </div>
+                  </div><br />
+                </div><br />
+              </div>
+              </table>
+            </div>
+          </div>
+          <div class="panel panel-primary" id="allShow" style="border-radius: 30px;">
+            <div class="panel-heading" style="border-radius: 30px;">
+              <span><strong>
+                  <center>Others</center>
+                </strong>
+              </span>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="table col-lg-12 col-xs-12 ">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name"><b>Occupation<span style="color: red">*</span>:</b></label>
+                      <select class="form-control" name="occupication" ng-model="occupication" required>
+                        <option value="" disabled>--SELECT--</option>
+                        <option value="BUSINESS">BUSINESS</option>
+                        <option value="TRADER">TRADER</option>
+                        <option value="LABOURER">LABOURER</option>
+                        <option value="PRIEST">PRIEST</option>
+                        <option value="PRIVATE_TEACHER">PRIVATE TEACHER</option>
+                        <option value="HOUSE_WIFE">HOUSE WIFE</option>
+                        <option value="OTHER">OTHER</option>
+                      </select>
+
+                      <span style="color:red" ng-show="myForm.occupication.$dirty && myForm.occupication.$invalid">
+                        <span ng-show="myForm.occupication.$error.required">Enter your
+                          occupication.</span>
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="name"><b>Religion<span style="color: red">*</span>:</b></label>
+                      <select class="form-control" name="religion" ng-model="religion" required>
+                        <option value="Christan">CHRISTAN</option>
+                        <option value="Hindu">HINDU</option>
+                        <option value="Muslim">MUSLIM</option>
+                        <option value="Sikh">SIKH</option>
+                        <option value="Jain">JAIN</option>
+                        <option value="Other">OTHER</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="Phone"><b style="font-size: 15px;">Date Since Residing In District Of Dimapur<span
+                            style="color: red">*</span>:</b></label>
+                      <input type="date" class="form-control" name="doresiding" ng-model="doresiding" required>
+                      <span style="color:red" ng-show="myForm.doresiding.$dirty && myForm.doresiding.$invalid">
+                        <span ng-show="myForm.doresiding.$error.required">Date Since Residing In
+                          District Of Dimapur required.</span>
+                      </span>
+                    </div>
+                  </div><br />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-primary" id="allShow" style="border-radius: 30px;">
+            <div class="panel-heading" style="border-radius: 30px;">
+              <span style="color:white">
+                <center><strong>UPLOAD DOCUMENTS</strong></center>
+              </span>
+            </div>
+            <div class="panel-body">
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" id="houseTaxId" name="houseTax" ng-model="houseTax"
+                      ng-click="houseTaxFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="houseTaxFileCheck()"><b
+                        ng-click="houseTax = houseTax == true ? false : true;">House Tax Receipt
+                        Prior To
+                        21/11/1979:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" ng-disabled="!houseTax" accept=" image/jpg, image/jpeg,application/pdf"
+                    class="form-control" name="houseTax" id="houseTax"
+                    onchange="angular.element(this).scope().houseTaxCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showHouseTaxError">
+                  <span style="color: red;">{{houseTaxFileGood}}</span>
+                </div>
+              </div><br />
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="electroroll" ng-model="electroroll"
+                      id="electrorollId" ng-click="electrorollFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="electrorollFileCheck()"><b
+                        ng-click="electroroll = electroroll == true ? false : true;">Copy of the
+                        Electro Roll Prior To
+                        21/11/1979 Containing the Name Of the Apllicant:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!electroroll"
+                    name="electroroll" id="electroroll" class="form-control"
+                    onchange="angular.element(this).scope().electrorollCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showelEctroRollError">
+                  <span style="color: red;">{{electroRollFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="electrorolltown" id="electrorolltownId"
+                      ng-click="electrorolltownFileCheck()" ng-model="electrorolltown"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="electrorolltownFileCheck()"><b
+                        ng-click="electrorolltown = electrorolltown == true ? false : true;">Copy
+                        of the Electro Roll of the town
+                        committee of the Prior To 21/11/1979 containing the name of the
+                        applicant :</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" class="form-control"
+                    ng-disabled="!electrorolltown" name="electrorolltown" id="electrorolltown"
+                    onchange="angular.element(this).scope().electrorolltownCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showElectroRollTownError">
+                  <span style="color: red;">{{electroRollTownFileGood}}</span>
+                </div>
+              </div><br />
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="houserent" ng-model="houserent" id="houserentId"
+                      ng-click="houserentFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="houserentFileCheck()"><b
+                        ng-click="houserent = houserent == true ? false : true;">House rent
+                        Receipts From The Land Owner
+                        Prior To 21/11/1979:</b></label></div>
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!houserent"
+                    name="houserent" id="houserent" class="form-control"
+                    onchange="angular.element(this).scope().houserentCheck()">
+                </div>
+                <div class="col-md-3" ng-show="showHouseRentError">
+                  <span style="color: red;">{{houseRentFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="tradelicence" ng-model="tradelicence"
+                      id="tradelicenceId" ng-click="tradelicenceFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="tradelicenceFileCheck()"><b
+                        ng-click="tradelicence = tradelicence == true ? false : true;">Trade
+                        Licence issued by town committee
+                        Prior To 21/11/1979:</b></label></div>
+
+
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!tradelicence"
+                    name="tradelicence" id="tradelicence" class="form-control"
+                    onchange="angular.element(this).scope().tradelicenceCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showTradeLicenceError">
+                  <span style="color: red;">{{tradeLicenceFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="schoolrecords" ng-model="schoolrecords"
+                      id="schoolrecordsId" ng-click="schoolrecordsFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="schoolrecordsFileCheck()"><b
+                        ng-click="schoolrecords = schoolrecords == true ? false : true;">School/college
+                        records Prior To
+                        21/11/1979:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!schoolrecords"
+                    name="schoolrecords" id="schoolrecords" class="form-control"
+                    onchange="angular.element(this).scope().schoolrecordsCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showSchoolRecordsError">
+                  <span style="color: red;">{{schoolRecordsFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="passport" ng-model="passport" id="passportId"
+                      ng-click="passportFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="passportFileCheck()"><b
+                        ng-click="passport = passport == true ? false : true;">Passport Prior
+                        To 21/11/1979:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!passport"
+                    name="passport" id="passport" class="form-control"
+                    onchange="angular.element(this).scope().passportCheck()">
+                </div>
+                <div class="col-md-3" ng-show="showPassportError">
+                  <span style="color: red;">{{passportFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="electribill" ng-model="electribill"
+                      id="electribillId" ng-click="electribillFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="electribillFileCheck()"><b
+                        ng-click="electribill = electribill == true ? false : true;">Electricity
+                        Bill Prior To 21/11/1979:</b></label></div>
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!electribill"
+                    name="electribill" id="electribill" class="form-control"
+                    onchange="angular.element(this).scope().electribillCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showElectriBillError">
+                  <span style="color: red;">{{electriBillFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="telephonebill" ng-model="telephonebill"
+                      id="telephonebillId" ng-click="telephonebillFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="telephonebillFileCheck()"><b
+                        ng-click="telephonebill = telephonebill == true ? false : true;">Telephone
+                        Bill Prior To 21/11/1979:</b></label></div>
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!telephonebill"
+                    name="telephonebill" id="telephonebill" class="form-control"
+                    onchange="angular.element(this).scope().telephonebillCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showTelephoneBillError">
+                  <span style="color: red;">{{telephoneBillFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="bankpassbook" ng-model="bankpassbook"
+                      id="bankpassbookId" ng-click="bankpassbookFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="bankpassbookFileCheck()"><b
+                        ng-click="bankpassbook = bankpassbook == true ? false : true;">Bank
+                        Passbook Prior To 21/11/1979:</b></label></div>
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!bankpassbook"
+                    name="bankpassbook" id="bankpassbook" class="form-control"
+                    onchange="angular.element(this).scope().bankpassbookCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showBankPassbookError">
+                  <span style="color: red;">{{bankPassbookFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="landtax" ng-model="landtax" id="landtaxId"
+                      ng-click="landtaxFileCheck()">
+                  </div>
+                  <div class="col-md-11"> <label for="file" ng-click="landtaxFileCheck()"><b
+                        ng-click="landtax = landtax == true ? false : true;">Land Tax
+                        Clearance Priror To 21/11/1979:</b></label></div>
+
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!landtax"
+                    name="landtax" id="landtax" class="form-control"
+                    onchange="angular.element(this).scope().landtaxCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showLandTaxError">
+                  <span style="color: red;">{{landTaxFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="incomeTaxReturn" ng-model="incomeTaxReturn"
+                      id="incomeTaxReturnId" ng-click="incomeTaxReturnFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="incomeTaxReturnFileCheck()"><b
+                        ng-click="incomeTaxReturn = incomeTaxReturn == true ? false : true;">Income
+                        Tax Returns, prior to 21/11/1979:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!incomeTaxReturn"
+                    name="incomeTaxReturn" id="incomeTaxReturn" class="form-control"
+                    onchange="angular.element(this).scope().incomeTaxReturnCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showIncomeTaxrError">
+                  <span style="color: red;">{{incomeTaxFileGood}}</span>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-1"><input type="checkbox" name="other" ng-model="other" id="otherId"
+                      ng-click="otherFileCheck()"></div>
+                  <div class="col-md-11"> <label for="file" ng-click="otherFileCheck()"><b
+                        ng-click="other = other == true ? false : true;">Others:</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" ng-disabled="!other" name="other"
+                    id="other" class="form-control" onchange="angular.element(this).scope().otherCheck()">
+                </div>
+
+                <div class="col-md-3" ng-show="showOtherError">
+                  <span style="color: red;">{{otherFileGood}}</span>
+                </div>
+              </div><br>
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-11"> <label>Documents submitted in the name of <span
+                        style="color: red">*</span>:-</label></div>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" ng-model="docSubmitBy" required>
+                    <option value="" disabled>-Select-</option>
+                    <option value="SELF">SELF</option>
+                    <option value="SPOUSE">SPOUSE</option>
+                    <option value="FATHER">FATHER</option>
+                    <option value="MOTHER">MOTHER</option>
+                  </select>
+                </div>
+              </div><br><br>
+              <div class="row" ng-show="docSubmitBy != 'SELF'">
+                <div class="col-md-5">
+                  <div class="col-md-12"> <label for="file"><b>Upload the document submitted as Proof of Relationship
+                        <span style="color: red">*</span>:-</b></label></div>
+                </div>
+                <div class="col-md-4">
+                  <!-- <input type="file" accept=" image/jpg, image/jpeg,application/pdf" name="proofOfRelationship"
+                                            id="proofOfRelationship" class="form-control"> -->
+                  <input type="file" accept="image/jpg, image/jpeg,application/pdf" class="form-control"
+                    name="proofOfRelationship" id="proofOfRelationship">
+                  <ul ng-repeat="x in proofOfRelationshipList">
+                    <li><a href="">Certificate{{$index + 1}}</a>
+                      <i class="fa fa-trash" aria-hidden="true"
+                        ng-click="removeCertificate('proofOfRelationship', $index)"
+                        style="color: red;margin-left: 50px;"></i>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-success" ng-click="addCertificate('proofOfRelationship');">Add File</button>
+                </div>
+                <div class="col-md-3" ng-show="showProofOfRelationshipError">
+                  <span style="color: red;">{{proofOfRelationshipFileGood}}</span>
+                </div>
+              </div><br><br>
+              <div class="row" >
+                <div class="col-md-5">
+                  <div class="col-md-12"> 
+                    <label for=""><b>Specify the other document submitted as Proof of having resided for
+                      more than a year prior to 09/12/2019 :-</b></label>
+                  </div>
+                  
+                </div>
+                <div class="col-md-4" style="height: 100px;">
+                  <textarea class="form-control" name="otherDocuments" ng-model="otherDocuments" rows="1" cols="50"
+                    placeholder="Enter Other Documents Name">
+                                      </textarea>
+                </div>
+                <span style="color:red" ng-show="myForm.otherDocuments.$dirty && myForm.otherDocuments.$invalid">
+                  <span ng-show="myForm.otherDocuments.$error.required">Other Documents Name.</span>
+                </span>
+              </div>
+              <div class="row ">
+                <div class="col-md-5">
+                  <div class="col-md-12">
+                    <label><b style="text-align: left;">
+                      Upload a scan copy of the filled in application form
+                      <span style="color: red">*</span>:-</b></label>
+                  </div>
+                  
+                </div>
+
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf"
+                    class="form-control" name="filledAppForm" id="filledAppForm" onchange="angular.element(this).scope().applicationCheck()">
+                  <div ng-show="showFilledAppFormError">
+                    <span style="color: red;">{{filledAppFormFileGood}}</span>
+                  </div>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="col-md-12">
+                    <label><b style="text-align: left; font-weight:600">
+                      Upload Government recognised Photo-ID with Present Address
+                      <span style="color: red">*</span>:-</b></label>
+                  </div>
+                  
+                </div>
+
+                <div class="col-md-4">
+                  <input type="file" accept=" image/jpg, image/jpeg,application/pdf" 
+                    class="form-control" name="govtPhotoId" id="govtPhotoId" onchange="angular.element(this).scope().govtPhotoIdCheck()" required>
+                  <div ng-show="showgovtPhotoIdError">
+                    <span style="color: red;">{{filledGovtPhotoIdGood}}</span>
+                  </div>
+                </div>
+              </div><br>
+              <div class="row container">
+                <div class="col-md-2">
+                  <label ng-hide="mode == 1"><b style="text-align: left;">Forwarded
+                      To<span style="color: red">*</span>:-</b></label>
+                  <label ng-show="mode == 1"><b style="text-align: left; ">Verified By
+                      <span style="color: red">*</span>:-</b></label>
+                </div>
+
+                <div class="col-md-3">
+                  <select class="form-control" ng-options="x.Name for x in vaList" ng-model="va" name="vaList" required>
+                    <option value="" disabled>--Choose Verifying Authority--</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div>
+                <div style="text-align: right;" ng-hide="applyNo == ''">
+                  <center>
+                    <button class="btn btn-info " ng-click="update();" ng-disabled="myForm.$invalid"
+                      style="text-align: right;">Update</button>
+                  </center>
+                </div><br>
+                <div style="text-align: right;" ng-show="applyNo == '' ">
+                  <center>
+                    <button class="btn btn-info " ng-click="preview();" style="text-align: right;"
+                    ng-disabled="myForm.$invalid || showHouseTaxError || showelEctroRollError || showElectroRollTownError || showHouseRentError || showTradeLicenceError || showSchoolRecordsError || showPassportError || showElectriBillError || showTelephoneBillError || showBankPassbookError || showLandTaxError || showIncomeTaxrError || showOtherError">Submit</button>
+                  </center>
+                </div><br>
+                <br>
+              </div>
+            </div><br>
+          </div>
+        </div>
+      </form>
+
+
+
+
+      <div ng-show="showAck">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span><strong>
+                <center>APPLICATION FORM FOR INNER LINE PERMIT (ILP) FOR 1(ONE) YEAR<br>
+                </center>
+
+              </strong>
+              <center>Home Department, Notification NO.CON-3/PAP/65/10, Dated Kohima, the 9th December, 2019.</center>
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="panel panel-primary" id="registerPage">
+              <div class="panel-heading">
+                <span><strong>
+                    <center>Application Details</center>
+                  </strong>
+                </span>
+              </div>
+              <div class="panel-body">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Token Number:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{tokenNo}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Applicant Name:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{ ntitle + " " +name}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Father Name:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{fatherTitle + " " +fathername}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Date Of Birth:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{ dob | date:'dd-MM-yyyy' }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Gender:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{gender}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Identification Mark:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{mark}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Contact Number:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{contactno || '--'}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Marital Status:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{material}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Occupication:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{occupication}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Religion:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{religion}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-xs-6">
+                      <label for="name"><b>Residing:</b></label>
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                      {{doresiding | date:'dd-MM-yyyy'}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div class="row">
+                    <center><img id="blah" src="#" alt="your image" style="height: 150px; width: 140px;" /></center>
+                  </div>
+                  <div class="row" ng-show="alldata.houseTaxUrl !=undefined ">
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.houseTaxUrl}}" download data-target="blank">House
+                          Tax Documents</a>
+                      </b></label>
+                  </div>
+                  <div class="row" ng-show="alldata.landPattaUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.landPattaUrl}}" download data-target="blank">LandPatta Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.electrorollUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.electrorollUrl}}" download data-target="blank">Electri Bill Of Applicant
+                          Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.electrorolltownUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.electrorolltownUrl}}" download data-target="blank">Electro roll of the
+                          town committe Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.houserentUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.houserentUrl }}" download data-target="blank">House
+                          Rent Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.tradelicenceUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.tradelicenceUrl }}" download data-target="blank">Trade Licence Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.schoolrecordsUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.schoolrecordsUrl }}" download data-target="blank">School Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.passportUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.passportUrl }}" download data-target="blank">Passport</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.electribillUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.electribillUrl }}" download data-target="blank">Electric Bill </a>
+                      </b></label>
+
+                  </div>
+
+                  <!-- <div class="row" ng-show="alldata.telephonebillUrl !=undefined ">
+                
+                                  <label for="name"><b>
+                                      <input type="checkbox" checked disabled>
+                                      <a href="{{alldata.telephonebillUrl }}" download data-target="blank">Telephonic Bill Documents</a>
+                                    </b></label>
+                
+                                </div>
+                                <div class="row" ng-show="alldata.bankpassbookUrl !=undefined ">
+                
+                                  <label for="name"><b>
+                                      <input type="checkbox" checked disabled>
+                                      <a href="{{alldata.bankpassbookUrl }}" download data-target="blank">Bank Passbook Documents</a>
+                                    </b></label>
+                
+                                </div> -->
+                  <div class="row" ng-show="alldata.landtaxUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.landtaxUrl }}" download data-target="blank">Land Tax Clearance Documents</a>
+                      </b></label>
+
+                  </div>
+                  <div class="row" ng-show="alldata.otherUrl !=undefined ">
+
+                    <label for="name"><b>
+                        <input type="checkbox" checked disabled>
+                        <a href="{{alldata.otherUrl }}" download data-target="blank">Others Documents</a>
+                      </b></label>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=" col-md-6 col-sm-6 col-xs-6">
+
+                <div class="panel panel-primary" id="allShow" style="height: 300px !important;">
+                  <div class="panel-heading">
+                    <span><strong>
+                        <center>Present Address</center>
+                      </strong>
+                    </span>
+                  </div>
+
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6 col-xs-6">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Villege:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{psvillege }}
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Police Station:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pspolicestation}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Plot No:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{psplotno || '--'}}
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Sub Division:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pssubdivision.subdivName}}
+                          </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>State:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            Nagaland
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xs-6">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>PostOffice:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pspostoffice}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>LandMark:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pslandmark || '--'}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Colony:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pscolony}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>District:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{psdistrict.districtName}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Pincode:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{pspincode}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-6">
+
+                <div class="panel panel-primary" id="allShow" style="height: 300px !important;">
+                  <div class="panel-heading">
+                    <span><strong>
+                        <center>Native Address</center>
+                      </strong>
+                    </span>
+                  </div>
+                  <div class="panel-body ">
+                    <div class="row">
+                      <div class="col-md-6 col-xs-6">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Villege:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prvillege}}
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Police Station:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prpolicestation}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Plot No:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prplotno || '--'}}
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Sub Division:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prsubdivision}}
+                          </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>State:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prstate.stateName}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xs-6">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>PostOffice:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prpostoffice}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>LandMark:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prlandmark|| '--'}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Colony:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prcolony}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>District:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prdistrict.districtName}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <label for="name"><b>Pincode:</b></label>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            {{prpincode}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6" style="text-align: left;">
+            <button class="btn btn-info " ng-click="back();" style="text-align: right;">Back</button>
+          </div>
+
+          <div class="col-md-6" style="text-align: right;">
+            <button type="button" class="btn btn-primary" onclick="this.disabled= true" ng-click="submit()">
+              &nbsp;PROCEED</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+</div>
+<script>
+
+  function nameNumber(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    // var regex = /[0-9]|\./;
+    var regex = /^[A-Za-z0-9 ]+$/;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+
+
+
+  function nameFilter(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    // var regex = /[0-9]|\./;
+    var regex = /^[A-Za-z ]+$/;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+  function pincode(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#blah').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#userPhoto").change(function () {
+    readURL(this);
+  });
+
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+  var applyNo = "<%= applyNo %>";
+
+</script>
+<script src="../../controller/user/registerforOneYear.js"></script>
+<%- include('common/footer.ejs') -%>

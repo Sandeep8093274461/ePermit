@@ -1,0 +1,128 @@
+
+
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <div class="container"><br>
+
+        <div class="tab-content"><br>
+            <div class="tab-pane fade in active">
+                <div class="panel panel-primary" id="allShow" class="tab-pane fade in active">
+                    <div class="panel-heading">
+                        <span><strong>
+                                <center>Pending Approval For One Year</center>
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <table class="table col-lg-12 col-xs-12 ">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">SL</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Token Number</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Name</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Father name</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Date Of Birth</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Applied On</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Contact Number</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Status</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align: center;" ng-repeat="y in alldata">
+                                        <td>{{$index+1}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.tokenNo}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.nametitle +" "+y.name}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.fatherTitle +" "+y.fatherName}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.dob | date:'dd-MM-yyyy'}}</td>
+                                        <td class="col-lg-2 col-xs-2 ">{{y.AppliedOn | date:'dd-MM-yyyy'}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.contactno}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.status}}</td>
+
+                                        <td class="col-lg-1 col-xs-1 "><button data-toggle="modal"
+                                                data-target="#myModal" type="button" class="btn btn-info"
+                                                style="background-color: rgb(7, 181, 250); border-radius: 8px;"
+                                                ng-click="rejected(y);">Reject</button></td>
+                                        <td class="col-lg-1 col-xs-1 "><button data-toggle="modal"
+                                                data-target="#myModal1" type="button" class="btn btn-info"
+                                                style="background-color: rgb(7, 181, 250); border-radius: 8px;"
+                                                ng-click="verified(y);">Approve</button></td>
+
+
+
+
+
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Details</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4>Application Number "{{allDetails.applyNo}}" is Rejected </h4>
+                                                        <textarea ng-model="rejectedReson" cols="70" rows="4" placeholder="Why You are Rejected"></textarea>
+ 
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">No</button>
+                                                            <button type="button" class="btn btn-default"  data-dismiss="modal"
+                                                            ng-click="reject(allDetails.applyNo);">Yes</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="myModal1" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Details</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                       <h4>Application Number "{{allDetails.applyNo}}" is Approve </h4>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">No</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                             ng-click="approve(allDetails.applyNo);">Yes</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+<script src="../controller/admin/approveLicenceForOneYear.js"></script>
+<%- include('common/footer.ejs') -%>

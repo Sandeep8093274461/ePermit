@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="userId" content="<%= userId %>">
+  <meta name="userName" content="<%= userName %>">
+  <meta name="userRole" content="<%= userRole %>">
+
+
+  <title>e-Permit ADMIN</title>
+  <link rel="icon" type="image/png" href="../images/icon.png" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="../../../stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../stylesheets/ionicons.min.css">
+  <link rel="stylesheet" href="../../../stylesheets/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../stylesheets/_all-skins.min.css">
+  <link rel="stylesheet" href="../../../stylesheets/morris.css">
+  <link rel="stylesheet" href="../../../stylesheets/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../../../stylesheets/myStyle.css"> 
+  <link rel="stylesheet" href="../../../stylesheets//bootstrap3-wysihtml5.min.css"> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">  
+  <script type="text/javascript" src="../../javascripts/angular.min.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper"  ng-app="myApp" ng-controller="myCtr">
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>e-Permit</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">          
+          <!-- Notifications: style can be found in dropdown.less -->
+          
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../../images/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{userName}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <p>
+                  
+                  <span style="color: white;text-transform: uppercase">{{userName}} </span><br>
+
+                 <span style="color: white;text-transform: uppercase"> Role :{{userRole}} </span>
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="http://localhost:1000/user/profileUpadate" style="font-weight: bold;color: white;"  class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="/logout" style="font-weight: bold;color: white;"  class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{userName}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+          <a href="#"><i class="fa fa-share"></i>Approve Licence
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+         
+          <ul class="treeview-menu">
+            <li><a href="/admin/approveLicenceForOneYear"><i class="fa fa-circle-o"></i>Approve Licence For One Year</a></li>
+            <li><a href="/admin/approveLicenceForLifeTime"><i class="fa fa-circle-o"></i>Approve Licence For Life Time</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-share"></i>Approved Licences
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+         
+          <ul class="treeview-menu">
+            <li><a href="/admin/approvedLicencesForOneYear"><i class="fa fa-circle-o"></i>Approved Licences For One Year</a></li>
+            <li><a href="/admin/approvedLicencesForLifeTime"><i class="fa fa-circle-o"></i>Approved Licences For Life Time</a></li>
+          </ul>
+        </li>
+                  <!-- <li><a href="/admin/approveLicence"><i class="fa fa-circle-o"></i> <span>Approve Licence</span></a></li> 
+          <li><a href="/admin/approvedLicences"><i class="fa fa-circle-o"></i> <span>Approved Licences</span></a></li>             -->
+      </ul>
+    </section>
+  </aside>

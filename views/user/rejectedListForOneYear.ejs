@@ -1,0 +1,139 @@
+
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <div class="container"><br>
+
+        <div class="tab-content"><br>
+            <div class="tab-pane fade in active">
+                <div class="panel panel-primary" id="allShow" class="tab-pane fade in active">
+                    <div class="panel-heading">
+                        <span><strong>
+                                <center>Search</center>
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2"><label for="name"><b>From Date:</b></label></div>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control" name="fromDateFilter" ng-model="fromDateFilter">
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"><label for="name"><b>To Date:</b></label></div>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control" name="toDateFilter" ng-model="toDateFilter">
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-2"><label for="name"><b>From State:</b></label></div>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-options="x.stateName for x in states"
+                                    name="fromStateFilter" ng-model="fromStateFilter" ng-change="loadFromDistricts()">
+                                    <option value="" >--State--</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"><label for="name"><b>From District:</b></label></div>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-options="x.districtName for x in fromdistricts"
+                                    ng-model="fromDistrictFilter" name="fromDistrictFilter">
+                                    <option value="" >--District--</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-2"><label for="name"><b>Gender:</b></label></div>
+                            <div class="col-md-3">
+                                <select class="form-control" name="fromGenderFilter" ng-model="fromGenderFilter">
+                                    <option value="">--select--</option>
+                                    <option value="Male">MALE</option>
+                                    <option value="Female">FEMALE</option>
+                                    <option value="Transgender"> TRANSGENDER</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"><label for="name"><b>Religion:</b></label></div>
+                            <div class="col-md-3">
+                                <select class="form-control" name="fromReligionFilter" ng-model="fromReligionFilter">
+                                    <option value="">--select--</option>
+                                    <option value="Christan">CHRISTAN</option>
+                                    <option value="Hindu">HINDU</option>
+                                    <option value="Muslim">MUSLIM</option>
+                                    <option value="Sikh">SIKH</option>
+                                    <option value="Jain">JAIN</option>
+                                    <option value="Other">OTHER</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <!-- <td class="col-lg-12 col-xs-12 "><button type="button" class="btn btn-danger"
+                            style=" background-color: rgb(243, 42, 42) !important; border-radius: 8px;float: right;"
+                            ng-click="clear();">Clear</button></td> -->
+                    </div>
+                </div>
+                <div class="panel panel-primary" id="allShow" class="tab-pane fade in active">
+                    <div class="panel-heading">
+                        <span><strong>
+                                <center>Rejected List </center>
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <table >
+                                <thead>
+                                    <tr class="row" style="text-align: center;">
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">SL</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Token Number</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Name</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Applied On</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Rejected By</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Rejected Date</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Reason</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Status</th>
+                                       
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row" style="text-align: center;"   dir-paginate="y in alldata | dateRangeFrom : fromDateFilter : this | dateRangeTo : toDateFilter:this | filter: { stateCode: fromStateFilter.stateCode,districtCode: fromDistrictFilter.districtCode, religion: fromReligionFilter  } | filter:(!!fromGenderFilter || undefined) && fromGenderFilter:true| itemsPerPage: 10 ">
+                                        <td class="col-lg-1 col-xs-1 ">{{$index+1}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.tokenNo}}</td>
+                                        <td class="col-lg-2 col-xs-1 ">{{y.nametitle +" "+ y.name }}</td>
+                                        <td class="col-lg-2 col-xs-2 ">{{y.AppliedOn | date:'dd-MM-yyyy' }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.rejectedBy }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.rejectedOn| date:'dd-MM-yyyy' }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.remark }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.status}}</td>
+                                        
+
+                                        <td class="col-lg-1 col-xs-1 "><button type="button" class="btn btn-info"
+                                                style="background-color: rgb(7, 181, 250); border-radius: 8px;"
+                                                ng-click="view(y.applyNo);">View</button></td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <center>
+                            <dir-pagination-controls>
+
+                            </dir-pagination-controls>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<script src="../controller/user/rejectedListForOneYear.js"></script>
+
+
+
+<%- include('common/footer.ejs') -%>

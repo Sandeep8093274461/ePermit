@@ -1,0 +1,31 @@
+<%- include('common/header.ejs') -%>
+
+<div class="content-wrapper">
+    <div class="container"><br>
+       
+        <div class="row" style="height: auto;">
+            <div class="col-md-6"><canvas id="noOfPersonBar" style="height: 280px; width: 300px; "></canvas>
+            </div>
+            <div class="col-md-6"><canvas id="noOfPersonPie" style=" height: 230px; width: 300px;  "></canvas></div>
+        </div><br><br>
+        <div class="row" style="margin-top: 30px;height: auto;">
+
+            <div class="col-md-6"><canvas id="noOfReligionPie" style=" height: 230px; width: 280px;"></canvas></div>
+            <div class="col-md-5"><canvas id="noOfReligionBar" style=" height: 230px; width: 300px;"></canvas>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px; margin-bottom: 30px; height: auto;">
+            <div class="col-md-6"><canvas id="noOfGenderBar" style=" height: 280px; width: 300px;"></canvas>
+            </div>
+            <div class="col-md-6"><canvas id="noOfGenderPie" style=" height: 200px; width: 400px;"></canvas></div>
+        </div>
+        <!-- <canvas id="myBarChart" style=" min-width: 160px; max-width: 600px;"></canvas> -->
+        
+</div>
+</div>
+
+
+
+
+<script src="../controller/user/chartPage.js"></script>
+<%- include('common/footer.ejs') -%>

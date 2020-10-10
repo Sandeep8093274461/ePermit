@@ -1,0 +1,433 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+  <div class="container"><br>
+
+      <div class="tab-content" style=" width: 1100px; height: 850px;"><br>
+          <div class="tab-pane fade in active">
+
+            <div class="panel panel-primary" id="allShow" class="tab-pane fade in active">
+              <div class="panel-heading">
+                  <span><strong>
+                          <center>Applicant details</center>
+                      </strong>
+                  </span>
+              </div>
+              <div class="panel-body">
+                <div class="col-md-7" style="padding-bottom: 30px;">
+                  
+                  <table class="table table-striped table-bordered table-hover" style="text-align: left; height: 300px; padding: 0px;">
+                    
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Token Number</td>
+                        <td>{{alldata.tokenNo}}</td>
+                      </tr>
+                      <tr>
+                        <td>Name</td>
+                        <td>{{alldata.nametitle + " " +alldata.name}}</td>
+                      </tr>
+                      <tr>
+                        <td>Father Name</td>
+                        <td>{{ alldata.fatherTitle + " " +alldata.fatherName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Date Of Birth</td>
+                        <td>{{ alldata.dob | date:'dd-MM-yyyy' }}</td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td>{{ alldata.gender }}</td>
+                      </tr>
+                      <tr>
+                        <td>Identification Mark</td>
+                        <td>{{ alldata.mark }}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Contact Number</td>
+                        <td>{{ alldata.contactno || '--' }}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Matterial Status</td>
+                        <td>{{ alldata.material }}</td>
+                      </tr>
+
+                      <tr>
+                        <td>Occupication</td>
+                        <td>{{alldata.occupication}}</td>
+                      </tr>
+                      <tr>
+                        <td>Religion</td>
+                        <td>{{alldata.religion}}</td>
+                      </tr>
+                      
+                        <td>Residing</td>
+                        <td>{{alldata.Residing | date:'dd-MM-yyyy'}}</td>
+                      </tr>
+                      
+                    </tbody>
+                   
+                  </table>
+                <br>
+                </div>
+
+                <div class="col-md-4" style="padding-bottom: 100px;">
+                  
+                  <table class="table table-striped table-bordered table-hover" style="text-align: left;">
+                    
+                    <thead>
+                    </thead>
+                    <tbody style="padding: 0.1;">
+                      <tr >
+                        <td><img ng-src="{{ alldata.userPhotoUrl }}" style="height: 150px; width: 130px;"></td>
+                      </tr>
+                      <tr  ng-show="alldata.houseTaxUrl !=undefined ">
+                        <td >House Tax Documents</td>
+                        <td><a href="{{ alldata.houseTaxUrl }}" download >View</a></td>
+                     
+                      </tr>
+                      <tr  ng-show="alldata.landPattaUrl != undefined">
+                        <td>LandPatta Documents</td>
+                        <td><a href="{{ alldata.landPattaUrl }}" download >View</a></td>
+                      </tr>
+                      <tr  ng-show="alldata.electrorollUrl != undefined ">
+                        <td>Electri Bill Of Applicant Documents</td>
+                        <td><a href="{{ alldata.electrorollUrl }}" download >View</a></td>
+                      </tr>
+                      <tr  ng-show="alldata.electrorolltownUrl != undefined  ">
+                        <td>Electro roll of the town committe  Documents</td>
+                        <td><a href="{{ alldata.electrorolltownUrl }}" download >View</a></td>
+                      </tr>
+                      <tr  ng-show="alldata.houseTaxUrl != undefined ">
+                        <td>House Rent Documents</td>
+                        <td><a href="{{ alldata.houserentUrl }}" download >View</a></td>
+                      </tr>
+                      <tr  ng-show="alldata.tradelicenceUrl != undefined  ">
+                        <td>Trade Licence Documents</td>
+                        <td><a href="{{ alldata.tradelicenceUrl }}" download >View</a></td>
+                      </tr>
+                      <tr  ng-show="alldata.schoolrecordsUrl != undefined ">
+                        <td>Scholl/College Documents</td>
+                        <td><a href="{{ alldata.schoolrecordsUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.passportUrl != undefined  ">
+                        <td>Passport Documents</td>
+                        <td><a href="{{ alldata.passportUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.electribillUrl != undefined  ">
+                        <td>ElectricBill Documents</td>
+                        <td><a href="{{ alldata.electribillUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.telephonebillUrl != undefined  ">
+                        <td>Telephonic Bill Documents</td>
+                        <td><a href="{{ alldata.telephonebillUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.bankpassbookUrl != undefined ">
+                        <td>Bank Passbook Documents</td>
+                        <td><a href="{{ alldata.bankpassbookUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.landtaxUrl != undefined  ">
+                        <td>Land Tax clerance</td>
+                        <td><a href="{{ alldata.landtaxUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.otherUrl != undefined  ">
+                        <td>Others Documents</td>
+                        <td><a href="{{ alldata.otherUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.birthCertificateUrl != undefined " ng-repeat="x in alldata.birthCertificateUrl">
+                        <td>Birth Certificate - {{$index + 1}}</td>
+                        <td><a href="{{ x }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.educationalCertificateUrl != undefined " ng-repeat="x in alldata.educationalCertificateUrl">
+                        <td>Education Certificate - {{$index + 1}}</td>
+                        <td><a href="{{ x }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.marriageCertificateUrl != undefined " ng-repeat="x in alldata.marriageCertificateUrl">
+                        <td>Marriage Certificate - {{$index + 1}}</td>
+                        <td><a href="{{ x }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.otherCertificateUrl != undefined " ng-repeat="x in alldata.otherCertificateUrl">
+                        <td>Others Certificate - {{$index + 1}}</td>
+                        <td><a href="{{ x }}" download >View</a></td>
+                      </tr>
+
+
+                      <tr ng-show="alldata.nativeAddressProofUrl != undefined  ">
+                        <td>Address Proof Documents</td>
+                        <td><a href="{{ alldata.nativeAddressProofUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.dimapurLivingProofUrl != undefined  ">
+                        <td>Living Proof Documents</td>
+                        <td><a href="{{ alldata.dimapurLivingProofUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.familyTreeSketchUrl != undefined ">
+                        <td>Family tree sketch Documents</td>
+                        <td><a href="{{ alldata.familyTreeSketchUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.filledAppFormUrl != undefined  ">
+                        <td>Application form</td>
+                        <td><a href="{{ alldata.filledAppFormUrl }}" download >View</a></td>
+                      </tr>
+                      <tr ng-show="alldata.govtPhotoIdUrl != undefined  ">
+                        <td>Govt. Photo Id Documents</td>
+                        <td><a href="{{ alldata.govtPhotoIdUrl }}" download >View</a></td>
+                      </tr>
+
+
+
+
+                      
+                    </tbody>
+                   
+                  </table>
+                
+                </div>
+                
+                <div class="row">
+                  <div class=" col-md-6 col-sm-6 col-xs-6">
+      
+                    <div class="panel panel-primary" id="allShow" style="height: 300px !important;">
+                      <div class="panel-heading">
+                        <span><strong>
+                            <center>Present Address</center>
+                          </strong>
+                        </span>
+                      </div>
+      
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Villege:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.villege}}
+                              </div>
+                            </div>
+          
+          
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Police Station:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.policeStation}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Plot No:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.plotno}}
+                              </div>
+                            </div>
+          
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Sub Division:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.subdivision.subdivName}}
+                              </div>
+                            </div>
+          
+          
+          
+          
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>State:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                               Nagaland
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>PostOffice:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.postOffice}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>LandMark:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.nearby}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Colony:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.colony}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>District:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.dist.districtName}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Pincode:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.presentAddress.pincode}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+      
+      
+      
+      
+                      </div>
+      
+                    </div>
+                  </div>
+      
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+      
+                    <div class="panel panel-primary" id="allShow" style="height: 300px !important;">
+                      <div class="panel-heading">
+                        <span><strong>
+                            <center>Native Address</center>
+                          </strong>
+                        </span>
+                      </div>
+                      <div class="panel-body ">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-6">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Villege:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.villege}}
+                              </div>
+                            </div>
+      
+      
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Police Station:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.policeStation}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Plot No:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.plotno}}
+                              </div>
+                            </div>
+      
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Sub Division:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.subdivision}}
+                              </div>
+                            </div>
+      
+      
+      
+      
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>State:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.state.stateName}}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>PostOffice:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.postOffice}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>LandMark:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.nearby}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Colony:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.colony}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>District:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.dist.districtName}}
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-6">
+                                <label for="name"><b>Pincode:</b></label>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                {{alldata.permanentAddress.pincode}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                     
+                      </div>
+                    </div>
+      
+                  </div>
+                </div>
+          </div>
+             
+              </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6" style="text-align: left;">
+                  <button class="btn btn-info " ng-click="back(alldata.register);" style="text-align: right;">Back</button>
+                </div>
+           </div>
+            </div>
+</div>
+</div>
+
+<script>
+ var applyNo = "<%= applyNo %>";
+</script>
+<script src="../controller/admin/viewPage.js"></script>
+
+
+
+<%- include('common/footer.ejs') -%>

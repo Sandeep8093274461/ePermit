@@ -1,0 +1,66 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <div class="container"><br>
+
+        <div class="tab-content"><br>
+            <div class="tab-pane fade in active">
+                <div class="panel panel-primary" id="allShow" class="tab-pane fade in active">
+                    <div class="panel-heading">
+                        <span><strong>
+                                <center>Edit Page</center>
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <table class="table col-lg-12 col-xs-12 ">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">SL</th>
+                                        <th class="col-lg-2 col-xs-2 " style="text-align: center;">Token Number</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Name</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Father name</th>
+                                        <th class="col-lg-2 col-xs-1 " style="text-align: center;">Date Of Birth</th>
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Applied On</th>
+                                       
+                                        <th class="col-lg-1 col-xs-1 " style="text-align: center;">Status</th>
+                                       
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align: center;" ng-repeat="y in alldata">
+                                        <td>{{$index+1}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.tokenNo }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.nametitle +" "+ y.name }}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.fatherTitle +" "+y.fatherName}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.dob | date:'dd-MM-yyyy'}}</td>
+                                        <td class="col-lg-2 col-xs-2 ">{{y.AppliedOn | date:'dd-MM-yyyy'}}</td>
+                                        <td class="col-lg-1 col-xs-1 ">{{y.status}}</td>
+                                        
+
+                                        <td class="col-lg-1 col-xs-1 "><button type="button" class="btn btn-info"
+                                                style="background-color: rgb(7, 181, 250); border-radius: 8px;"
+                                                ng-click="view(y.applyNo,y.register);">Edit</button></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<script src="../controller/user/signupPageEdit.js"></script>
+
+
+
+<%- include('common/footer.ejs') -%>
